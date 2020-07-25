@@ -1,2 +1,2 @@
 # Covid 19 tracker
-First commit
+A web app that tracks covid 19 cases worldwide.
