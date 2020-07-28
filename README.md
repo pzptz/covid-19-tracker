@@ -1,2 +1,3 @@
 # Covid 19 tracker
-First commit
+## Description
+Track # of current covid-19 cases across the world.
