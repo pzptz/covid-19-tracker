@@ -1,16 +1,15 @@
 import React from "react";
 import "./App.css";
 
+// components
+import Cards from "./components/Cards";
+
 function App() {
-
-  const showJack = (str) => {
-    let jack = "jack";
-    console.log(str);
-  };
-
   return (
     <div className="App">
-      <h1>{showJack("hi")}</h1>
+      <Cards />
+      <Cards />
+      <Cards />
     </div>
   );
 }
