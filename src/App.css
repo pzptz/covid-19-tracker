@@ -11,3 +11,29 @@ body {
   justify-content: space-evenly;
   padding: 20px;
 }
+
+.app__left {
+  flex: 0.9;
+}
+
+.app__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.app__header > h2 {
+  font-size: 2rem;
+  color: red;
+}
+
+.app__right {
+  display: flex;
+  flex-direction: column;
+}
+
+.app__cards {
+  display: flex;
+  justify-content: space-between;
+}
