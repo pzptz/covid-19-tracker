@@ -4,6 +4,8 @@ import "./App.css";
 
 // components
 import Cards from "./components/Cards";
+import Table from "./components/Table";
+import Map from "./components/Map"
 
 function App() {
   const [countryInfo, setCountryInfo] = useState({});
@@ -27,7 +29,9 @@ function App() {
     const countries = data.map((country) => ({
       name: country.country,
       value: country.countryInfo.iso2,
+      cases: country.cases,
     }));
+    console.log(data);
     setCountries(countries);
   };
 
@@ -45,7 +49,7 @@ function App() {
     <div className="app">
       <div className="app__left">
         <div className="app__header">
-          <h2>Title</h2>
+          <h2>COVID-19 Tracker</h2>
         </div>
         <div className="app__form">
           <FormControl>
@@ -74,8 +78,11 @@ function App() {
             total={countryInfo.deaths}
           />
         </div>
+        <Map />
       </div>
-      <div className="app__right"></div>
+      <div className="app__right">
+        <Table countries={countries} />
+      </div>
     </div>
   );
 }
