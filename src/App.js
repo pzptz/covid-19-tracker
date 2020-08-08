@@ -5,12 +5,16 @@ import "./App.css";
 // components
 import Cards from "./components/Cards";
 import Table from "./components/Table";
-import Map from "./components/Map"
+import Map from "./components/Map";
 
 function App() {
   const [countryInfo, setCountryInfo] = useState({});
   const [countries, setCountries] = useState(["US", "UK"]);
   const [country, setCountry] = useState("worldwide");
+  const [mapCountries, setMapCountries] = useState([]);
+  const [casesType, setCasesType] = useState("cases");
+  const [mapCenter, setMapCenter] = useState({ lat: 30, lng: -40 });
+  const [mapZoom, setMapZoom] = useState(3);
 
   const onCountryChange = async (event) => {
     const countryCode = event.target.value;
@@ -21,6 +25,8 @@ function App() {
     const data = await response.json();
     setCountry(countryCode);
     setCountryInfo(data);
+    setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+    setMapZoom(4);
   };
 
   const getCountriesData = async () => {
@@ -33,6 +39,7 @@ function App() {
     }));
     console.log(data);
     setCountries(countries);
+    setMapCountries(data);
   };
 
   useEffect(() => {
@@ -52,8 +59,12 @@ function App() {
           <h2>COVID-19 Tracker</h2>
         </div>
         <div className="app__form">
-          <FormControl>
-            <Select variant="outlined" onChange={onCountryChange}>
+          <FormControl className="app__dropdown">
+            <Select
+              variant="outlined"
+              onChange={onCountryChange}
+              value={country}
+            >
               <MenuItem value="worldwide">worldwide</MenuItem>
               {countries.map((country) => (
                 <MenuItem value={country.value}>{country.name}</MenuItem>
@@ -66,22 +77,30 @@ function App() {
             title="Cases"
             cases={countryInfo.todayCases}
             total={countryInfo.cases}
+            onClick={(e) => setCasesType("cases")}
           />
           <Cards
             title="Recovered"
             cases={countryInfo.todayRecovered}
             total={countryInfo.recovered}
+            onClick={(e) => setCasesType("recovered")}
           />
           <Cards
             title="Deaths"
             cases={countryInfo.todayDeaths}
             total={countryInfo.deaths}
+            onClick={(e) => setCasesType("deaths")}
           />
         </div>
-        <Map />
+        <Map
+          casesType={casesType}
+          countries={mapCountries}
+          center={mapCenter}
+          zoom={mapZoom}
+        />
       </div>
       <div className="app__right">
-        <Table countries={countries} />
+        <Table countries={mapCountries} />
       </div>
     </div>
   );
