@@ -13,7 +13,7 @@ function App() {
   const [country, setCountry] = useState("worldwide");
   const [mapCountries, setMapCountries] = useState([]);
   const [casesType, setCasesType] = useState("cases");
-  const [mapCenter, setMapCenter] = useState({ lat: 30, lng: -40 });
+  const [mapCenter, setMapCenter] = useState({ lat: 30.34534, lng: -40.3534 });
   const [mapZoom, setMapZoom] = useState(3);
 
   const onCountryChange = async (event) => {
@@ -50,7 +50,7 @@ function App() {
 
   useEffect(() => {
     getCountriesData();
-  }, [countries]);
+  }, [country]);
 
   return (
     <div className="app">

@@ -11,8 +11,8 @@ function Map({ casesType, countries, center, zoom }) {
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {/* {drawCirclesOnMap(countries, casesType)} */}
-        {/*we will call drawCircleOnMap(countries, casesType) here*/}
+        {drawCirclesOnMap(countries, casesType)}
+        {console.log(center)}
       </LeafletMap>
     </div>
   );
