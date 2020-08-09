@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { FormControl, MenuItem, Select } from "@material-ui/core";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  Card,
+  CardContent,
+} from "@material-ui/core";
 import "./App.css";
+import { formatNumbers, sort } from "./utils";
 
 // components
 import Cards from "./components/Cards";
@@ -38,7 +45,7 @@ function App() {
       cases: country.cases,
     }));
     console.log(data);
-    setCountries(countries);
+    setCountries(sort(countries));
     setMapCountries(data);
   };
 
@@ -75,20 +82,20 @@ function App() {
         <div className="app__cards">
           <Cards
             title="Cases"
-            cases={countryInfo.todayCases}
-            total={countryInfo.cases}
+            cases={formatNumbers(countryInfo.todayCases)}
+            total={formatNumbers(countryInfo.cases)}
             onClick={(e) => setCasesType("cases")}
           />
           <Cards
             title="Recovered"
-            cases={countryInfo.todayRecovered}
-            total={countryInfo.recovered}
+            cases={formatNumbers(countryInfo.todayRecovered)}
+            total={formatNumbers(countryInfo.recovered)}
             onClick={(e) => setCasesType("recovered")}
           />
           <Cards
             title="Deaths"
-            cases={countryInfo.todayDeaths}
-            total={countryInfo.deaths}
+            cases={formatNumbers(countryInfo.todayDeaths)}
+            total={formatNumbers(countryInfo.deaths)}
             onClick={(e) => setCasesType("deaths")}
           />
         </div>
@@ -99,9 +106,12 @@ function App() {
           zoom={mapZoom}
         />
       </div>
-      <div className="app__right">
-        <Table countries={mapCountries} />
-      </div>
+      <Card className="app__right">
+        <CardContent>
+          <h2>Nationwide Cases</h2>
+          <Table countries={countries} />
+        </CardContent>
+      </Card>
     </div>
   );
 }

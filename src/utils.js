@@ -1,4 +1,5 @@
 import React from "react";
+import numeral from "numeral";
 import { Circle, Popup } from "react-leaflet";
 
 const casesTypeProperties = {
@@ -35,11 +36,36 @@ export const drawCirclesOnMap = (countries, casesType = "cases") =>
                   - cases count
                   - recovered count
                   - death count */}
-            <div className="info-flag" style={{backgroundImage: `url(${country.countryInfo.flag})`}} />
-            <div className="info-name">{country.country}</div>
-            <div className="info-recovered">Recovered: {country.cases}</div>
-            <div className="info-deaths">Deaths: {country.deaths}</div>
+          <div
+            className="info-flag"
+            style={{ backgroundImage: `url(${country.countryInfo.flag})` }}
+          />
+          <div className="info-name">{country.country}</div>
+          <div className="info-cases">
+            Cases: {numeral(country.cases).format("0,0")}
+          </div>
+          <div className="info-recovered">
+            Recovered: {numeral(country.recovered).format("0,0")}
+          </div>
+          <div className="info-deaths">
+            Deaths: {numeral(country.deaths).format("0,0")}
+          </div>
         </div>
       </Popup>
     </Circle>
   ));
+
+export const formatNumbers = (number) =>
+  number ? `+${numeral(number).format("0,0")}` : "+0";
+
+export const sort = (data) => {
+  const sorted = [...data];
+  sorted.sort((a, b) => {
+    if (a.cases > b.cases) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+  return sorted;
+};

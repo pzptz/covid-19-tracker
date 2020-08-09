@@ -33,8 +33,25 @@ body {
   flex-direction: column;
 }
 
+.app__right .MuiCardContent-root {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+}
+
 .app__cards {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
+}
+
+@media (max-width: 990px) {
+  .app {
+    flex-direction: column;
+  }
+}
+
+h2 {
+  color: #415058;
 }
