@@ -13,6 +13,7 @@ import { formatNumbers, sort } from "./utils";
 import Cards from "./components/Cards";
 import Table from "./components/Table";
 import Map from "./components/Map";
+import Graph from "./components/Graph";
 
 function App() {
   const [countryInfo, setCountryInfo] = useState({});
@@ -26,14 +27,28 @@ function App() {
   const onCountryChange = async (event) => {
     const countryCode = event.target.value;
     let URL = "";
-    if (countryCode === "worldwide") URL = "https://disease.sh/v3/covid-19/all";
-    else URL = `https://disease.sh/v3/covid-19/countries/${countryCode}`;
-    const response = await fetch(URL);
-    const data = await response.json();
+    let lat = 30.34534;
+    let long = -40.3534;
+    let data;
+    let response;
+    let zoom;
+    if (countryCode === "worldwide") {
+      URL = "https://disease.sh/v3/covid-19/all";
+      response = await fetch(URL);
+      data = await response.json();
+      zoom = 2;
+    } else {
+      URL = `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+      response = await fetch(URL);
+      data = await response.json();
+      lat = data.countryInfo.lat;
+      long = data.countryInfo.long;
+      zoom = 4;
+    }
     setCountry(countryCode);
     setCountryInfo(data);
-    setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-    setMapZoom(4);
+    setMapCenter([lat, long]);
+    setMapZoom(zoom);
   };
 
   const getCountriesData = async () => {
@@ -81,18 +96,21 @@ function App() {
         </div>
         <div className="app__cards">
           <Cards
+            isRed
             title="Cases"
             cases={formatNumbers(countryInfo.todayCases)}
             total={formatNumbers(countryInfo.cases)}
             onClick={(e) => setCasesType("cases")}
           />
           <Cards
+            isGreen
             title="Recovered"
             cases={formatNumbers(countryInfo.todayRecovered)}
             total={formatNumbers(countryInfo.recovered)}
             onClick={(e) => setCasesType("recovered")}
           />
           <Cards
+            isGrey
             title="Deaths"
             cases={formatNumbers(countryInfo.todayDeaths)}
             total={formatNumbers(countryInfo.deaths)}
@@ -110,6 +128,8 @@ function App() {
         <CardContent>
           <h2>Nationwide Cases</h2>
           <Table countries={countries} />
+          <h2>Graph of Cases</h2>
+          <Graph></Graph>
         </CardContent>
       </Card>
     </div>
