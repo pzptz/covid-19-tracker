@@ -129,7 +129,7 @@ function App() {
           <h2>Nationwide Cases</h2>
           <Table countries={countries} />
           <h2>Graph of Cases</h2>
-          <Graph></Graph>
+          <Graph casesType={casesType} />
         </CardContent>
       </Card>
     </div>
