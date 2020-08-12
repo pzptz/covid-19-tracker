@@ -1,12 +1,19 @@
 .map {
-    height: 500px;
-    width: auto;
-    background-color: white;
-    margin-top: 20px;
-    padding: 1rem;
-    border-radius: 20px;
+  height: 500px;
+  width: auto;
+  background-color: white;
+  margin-top: 20px;
+  padding: 1rem;
+  border-radius: 20px;
 }
 
 .map .leaflet-container {
   height: 100%;
+}
+
+.info-flag {
+  width: 100%;
+  height: 70px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }

@@ -1,33 +1,16 @@
 import React from "react";
 import numeral from "numeral";
 import { Circle, Popup } from "react-leaflet";
-
-const casesTypeProperties = {
-  cases: {
-    hex: "#ff3300",
-    multiplier: 1000,
-  },
-  recovered: {
-    hex: "#33ffbb",
-    multiplier: 1000,
-  },
-  deaths: {
-    hex: "#808080",
-    multiplier: 1000,
-  },
-};
+import { casesColor } from "./constants/color";
 
 export const drawCirclesOnMap = (countries, casesType = "cases") =>
   countries.map((country) => (
     <Circle
       center={[country.countryInfo.lat, country.countryInfo.long]}
       fillOpacity={0.5}
-      color={casesTypeProperties[casesType].hex}
-      fillColor={casesTypeProperties[casesType].hex}
-      radius={
-        Math.sqrt(country[casesType]) *
-        casesTypeProperties[casesType].multiplier
-      }
+      color={casesColor[casesType].hex}
+      fillColor={casesColor[casesType].hex}
+      radius={Math.sqrt(country[casesType]) * casesColor[casesType].multiplier}
     >
       <Popup>
         <div className="info-container">

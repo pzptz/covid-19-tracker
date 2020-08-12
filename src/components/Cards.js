@@ -1,14 +1,15 @@
 import React from "react";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import "./Cards.css";
+import { casesColor } from "../constants/color";
 
 function Cards({ isRed, isGreen, isGrey, title, cases, total, onClick }) {
   const getColor = () => {
-    let color = "#ff3300";
+    let color = casesColor.cases.hex;
     if (isGreen) {
-      color = "#33ffbb";
+      color = casesColor.recovered.hex;
     } else if (isGrey) {
-      color = "#808080";
+      color = casesColor.deaths.hex;
     }
     return color;
   };
