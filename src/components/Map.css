@@ -17,3 +17,14 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.info-name {
+  font-weight: bold;
+}
+
+.info-center {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-top: 0.5rem;
+}

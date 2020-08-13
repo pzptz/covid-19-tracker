@@ -19,11 +19,13 @@ export const drawCirclesOnMap = (countries, casesType = "cases") =>
                   - cases count
                   - recovered count
                   - death count */}
-          <div
-            className="info-flag"
-            style={{ backgroundImage: `url(${country.countryInfo.flag})` }}
-          />
-          <div className="info-name">{country.country}</div>
+            <div
+              className="info-flag"
+              style={{ backgroundImage: `url(${country.countryInfo.flag})` }}
+            />
+          <div className="info-center">
+            <div className="info-name">{country.country}</div>
+          </div>
           <div className="info-cases">
             Cases: {numeral(country.cases).format("0,0")}
           </div>
